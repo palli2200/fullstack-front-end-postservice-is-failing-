@@ -1,0 +1,115 @@
+<div class="row">
+    <div class="col mt-3">
+      <div class="container-sm">
+        <div class="card">
+          <div class="card-header cardheader text-center">
+            Form Data
+          </div>
+          <div class="card-body">
+            <h5 class="card-title cardtitle">Enter the Form Details</h5>
+            <form (ngSubmit)="onSubmit()" [formGroup]="formData">
+              <div class="row mt-2">
+                <div class="col">
+                  <label class="labelclass" for="firstName">First Name</label>
+                  <input type="text" formControlName="firstname" class="form-control" placeholder="First name" >
+                </div>
+                <div class="col">
+                  <label class="labelclass" for="lastName">Last Name</label>
+                  <input type="text" formControlName="lastname" class="form-control" placeholder="Last name" id="lastName">
+                </div>
+                <div class="col">
+                  <label class="labelclass" for="email">Email</label>
+                  <input type="text" formControlName="email" class="form-control" placeholder="Email" id="email">
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col">
+                  <label class="labelclass" for="age">Age</label>
+                  <input type="text" formControlName="age" class="form-control" placeholder="Age" id="age">
+                </div>
+                <div class="col">
+                  <label class="labelclass" for="mobileNumber">Mobile Number</label>
+                  <input type="text" formControlName="mobilenumber" class="form-control" placeholder="Mobile Number" id="mobileNumber">
+                </div>
+                <div class="col">
+                  <label class="labelclass" for="dob">DOB</label>
+                  <input type="date" formControlName="dob" class="form-control" placeholder="DOB" id="dob">
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col">
+                  <label class="labelclass" for="place">Native Place</label>
+                  <input type="text" formControlName="place" class="form-control" placeholder="Native Place" id="place">
+                </div>
+                <div class="col mt-3">
+                  <mat-form-field>
+                    <mat-label>Gender</mat-label>
+                    <mat-select formControlName="gender">
+                      <mat-option *ngFor="let gender of genderList" [value]="gender">{{ gender }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                    <button class="btn btn-primary" *ngIf="!isEdit" type="submit">submit</button>
+                    <button class="btn btn-success" *ngIf="isEdit" type="button" (click)="onSave()" >save</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-danger" type="button" (click)="onCancle()">cancle</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col mt-5">
+      <!-- table -->
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Age</th>
+            <th scope="col">Mobile Number</th>
+            <th scope="col">DOB</th>
+            <th scope="col">Place</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of listOfData, let i = index">
+            <th scope="row">{{i}} </th>
+            <td>{{user?.firstname }} </td>
+            <td>{{user?.lastname }} </td>
+            <td>{{user?.email}} </td>
+            <td>{{user?.age}} </td>
+            <td>{{user?.mobilenumber}} </td>
+            <td>{{user?.dob}} </td>
+            <td>{{user?.place}} </td>
+            <td>{{user?.gender}} </td>
+            <td (click)="onEdit(i)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                </svg>
+            </td>
+            <td (click)="onDelete(i)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                </svg>
+            </td>
+            
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

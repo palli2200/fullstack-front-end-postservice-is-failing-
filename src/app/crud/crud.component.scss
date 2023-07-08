@@ -1,0 +1,16 @@
+.labelclass, .cardtitle{
+    font-family: 'Times New Roman', serif;
+}
+
+.cardheader{
+    background-color: rgb(59, 59, 179);
+    color: #fff;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+input.ng-invalid .ng-touched {
+    border: 2px solid red;
+}
+input.ng-touched .ng-valid {
+    border: 2px solid green;
+}
